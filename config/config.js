@@ -21,7 +21,13 @@ const envVarsSchema = Joi.object({
   MONGO_HOST: Joi.string().required()
     .description('Mongo DB host url'),
   MONGO_PORT: Joi.number()
-    .default(27017)
+    .default(27017),
+  SPOTIFY_CLIENT_ID: Joi.string()
+    .description('spotify client id'),
+  SPOTIFY_CLIENT_SECRET: Joi.string()
+    .description('spotifu client secret'),
+  SPOTIFY_ACCOUNT: Joi.string()
+    .description('the account')
 }).unknown()
   .required();
 
@@ -38,7 +44,10 @@ const config = {
   mongo: {
     host: envVars.MONGO_HOST,
     port: envVars.MONGO_PORT
-  }
+  },
+  spotifyClientID: envVars.SPOTIFY_CLIENT_ID,
+  spotifyClientSecret: envVars.SPOTIFY_CLIENT_SECRET,
+  spotifyAccount: envVars.SPOTIFY_ACCOUNT
 };
 
 export default config;

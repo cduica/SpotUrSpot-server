@@ -20,7 +20,7 @@ const SpotSchema = new mongoose.Schema({
 
 SpotSchema.statics = {
     get(id) {
-        return this.findById(id)
+        return this.findOne({spotID: id})
             .exec()
             .then((spot) => {
                 if(spot) {
