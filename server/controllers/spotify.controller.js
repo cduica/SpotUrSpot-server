@@ -1,13 +1,12 @@
 import SpotifyWebApi from 'spotify-web-api-node'
 import config from '../../../config.json';
-import http from 'http'
+import request from 'request';
 import Spot from '../models/spot.model';
 
 var scopes = ['user-read-private', 'user-read-email', 'user-modify-playback-state'],
     redirectUri = 'https://example.com/callback',
-    clientId = '<put it here>',
+    clientId = config.SPOTIFY_CLIENT_ID,
     state = 'some-state-of-my-choice';
-
 
 const spotifyApi = new SpotifyWebApi({
     clientId : config.SPOTIFY_CLIENT_ID,
@@ -15,10 +14,11 @@ const spotifyApi = new SpotifyWebApi({
     redirectUri : 'http://www.example.com/callback'
 });
 
-var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
+//var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
 
-console.log(authorizeURL);
-var code = '<get authorize code>'
+//console.log(authorizeURL);
+var code = config.SPOTIFY_ACCESS_CODE;
+
 spotifyApi.authorizationCodeGrant(code)
   .then(function(data) {
     console.log('The token expires in ' + data.body['expires_in']);
